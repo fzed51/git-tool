@@ -5,28 +5,28 @@
 
 import "dotenv/config";
 import { Mistral } from "@mistralai/mistralai";
-import { git } from "./git-wrapper";
+import { git } from "./git-wrapper.js";
 
 const mistral = new Mistral({
-	apiKey: process.env.MISTRAL_API_KEY,
+  apiKey: process.env.MISTRAL_API_KEY,
 });
 
 export async function generateCommitMessage(): Promise<string> {
-	const stagedFiles = await git.getStagedFiles();
+  const stagedFiles = await git.getStagedFiles();
 
-	if (stagedFiles.length === 0) {
-		throw new Error(
-			"Aucun fichier staged. Utilisez 'git add' pour ajouter des fichiers.",
-		);
-	}
+  if (stagedFiles.length === 0) {
+    throw new Error(
+      "Aucun fichier staged. Utilisez 'git add' pour ajouter des fichiers.",
+    );
+  }
 
-	const diff = await git.getStagedDiff();
+  const diff = await git.getStagedDiff();
 
-	if (!diff.trim()) {
-		throw new Error("Aucune modification trouvée dans les fichiers staged.");
-	}
+  if (!diff.trim()) {
+    throw new Error("Aucune modification trouvée dans les fichiers staged.");
+  }
 
-	const prompt = `Analyse les changements git suivants et génère un message de commit concis et descriptif.
+  const prompt = `Analyse les changements git suivants et génère un message de commit concis et descriptif.
 
 Fichiers modifiés:
 ${stagedFiles.join("\n")}
@@ -42,22 +42,22 @@ Génère un message de commit qui suit les conventions:
 
 Réponds uniquement avec le message de commit, sans explication supplémentaire.`;
 
-	const response = await mistral.chat.complete({
-		model: "devstral-medium-latest",
-		messages: [
-			{
-				role: "user",
-				content: prompt,
-			},
-		],
-	});
+  const response = await mistral.chat.complete({
+    model: "devstral-medium-latest",
+    messages: [
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
 
-	const content = response.choices?.[0]?.message?.content;
-	const commitMessage = typeof content === "string" ? content.trim() : "";
+  const content = response.choices?.[0]?.message?.content;
+  const commitMessage = typeof content === "string" ? content.trim() : "";
 
-	if (!commitMessage) {
-		throw new Error("Impossible de générer un message de commit.");
-	}
+  if (!commitMessage) {
+    throw new Error("Impossible de générer un message de commit.");
+  }
 
-	return commitMessage;
+  return commitMessage;
 }
