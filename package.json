@@ -3,8 +3,12 @@
 	"version": "1.0.0",
 	"description": "A command-line tool for Git operations",
 	"type": "module",
+	"bin": {
+		"git-commit": "./dist/git-commit.js"
+	},
 	"scripts": {
 		"build": "tsc",
+		"postbuild": "chmod +x dist/git-commit.js",
 		"dev": "tsc --watch",
 		"lint": "biome check .",
 		"lint:fix": "biome check --write .",

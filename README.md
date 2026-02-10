@@ -10,12 +10,28 @@ Ce projet vise à créer un ensemble d'outils pour améliorer et automatiser cer
 
 ### 1. Générateur de messages de commit
 
-À partir des fichiers modifiés ajoutés au staging et des différences, génère automatiquement un message de commit pertinent et descriptif.
+À partir des fichiers modifiés ajoutés au staging et des différences, génère automatiquement un message de commit pertinent et descriptif en utilisant l'IA Mistral.
 
 ## Installation
 
 ```bash
 yarn install
+yarn build
+```
+
+## Utilisation
+
+### Utilisation programmatique
+
+```typescript
+import { generateCommitMessage, git } from "git-tool";
+
+// Générer un message de commit
+const message = await generateCommitMessage();
+console.log(message);
+
+// Utiliser le wrapper git
+const stagedFiles = await git.getStagedFiles();
 ```
 
 ## Configuration
