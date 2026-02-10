@@ -18,6 +18,17 @@ Ce projet vise à créer un ensemble d'outils pour améliorer et automatiser cer
 yarn install
 ```
 
+## Configuration
+
+Créez un fichier `.env` à la racine du projet avec les variables d'environnement suivantes :
+
+```env
+# Clé API pour le service d'IA (OpenAI, Anthropic, etc.)
+MISTRAL_API_KEY=votre_cle_api_ici
+```
+
+**Note:** Le fichier `.env` ne doit jamais être commité dans le dépôt. Assurez-vous qu'il est dans le `.gitignore`.
+
 ## Développement
 
 ```bash
