@@ -52,6 +52,19 @@ Réponds uniquement avec le message de commit, sans explication supplémentaire.
     ],
   });
 
+  // Log token usage
+  if (response.usage) {
+    console.info("\nTokens utilisés:");
+    console.info("─".repeat(30));
+    if (response.usage.promptTokens !== undefined)
+      console.info("promptTokens:", response.usage.promptTokens);
+    if (response.usage.completionTokens !== undefined)
+      console.info("completionTokens:", response.usage.completionTokens);
+    if (response.usage.totalTokens !== undefined)
+      console.info("totalTokens:", response.usage.totalTokens);
+    console.info("─".repeat(30)+"\n");
+  }
+
   const content = response.choices?.[0]?.message?.content;
   const commitMessage = typeof content === "string" ? content.trim() : "";
 
