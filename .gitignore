@@ -11,3 +11,6 @@ dist/
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# Env file
+.env
