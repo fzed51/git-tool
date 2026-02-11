@@ -10,9 +10,20 @@ import { stdin as input, stdout as output } from "node:process";
 import * as readline from "node:readline/promises";
 import { generateCommitMessage } from "./lib/git-commit.js";
 import { GitWrapper } from "./lib/git-wrapper.js";
+import chalk from "chalk";
 
 async function main() {
   try {
+    console.log(
+      chalk.green.bold(
+        [
+          "  ▘▗             ▘▗",
+          "▛▌▌▜▘▄▖▛▘▛▌▛▛▌▛▛▌▌▜▘",
+          "▙▌▌▐▖  ▙▖▙▌▌▌▌▌▌▌▌▐▖",
+          "▄▌",
+        ].join("\n"),
+      ),
+    );
     console.log("🤖 Génération du message de commit...\n");
 
     const message = await generateCommitMessage();
