@@ -1,0 +1,33 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.2.0] - 2026-02-11
+
+### Added
+- ASCII art banner with chalk for enhanced CLI experience
+- Public API with exported functions (`generateCommitMessage`, `git`, `GitWrapper`)
+- MIT license
+- Interactive confirmation before committing
+- Token usage logging in git commit generation
+- Mistral AI integration for commit message generation
+- Environment variable support with dotenv
+- README documentation with configuration instructions
+
+### Fixed
+- Set temperature to 0.2 for more deterministic AI responses
+- Improved JSON and TypeScript file formatting
+
+### Changed
+- Updated configuration files for improved settings and dependencies
+- Updated module resolution settings
+
+## [0.0.1] - Initial Development
+
+### Added
+- Initial project setup
+- Git wrapper functionality
+- Command-line interface for git operations
