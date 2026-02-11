@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+---
+
+## [0.4.0] - 2023-11-10
+
+### Added
+- Added `git-changelog` command for AI-powered changelog generation
+- Added methods to retrieve Git tags
+- Added `wrapLines` function for commit message formatting
+- Added Jest configuration and test scripts
+- Added comprehensive tool documentation in the README
+
+### Changed
+- Improved commit message generation
+- Clarified commit message instructions in the documentation
+- Added `commander` dependency for CLI improvements
+
+### Fixed
+- Preserved bullet points and numbered lists in line wrapping
+
+
 ## [0.3.0] - 2026-02-11
 
 ### Added

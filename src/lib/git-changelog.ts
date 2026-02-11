@@ -52,6 +52,9 @@ export async function generateChangelog(
     throw new Error("Aucun commit trouvé pour générer le changelog.");
   }
 
+  // date du jour au format YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0];
+
   const system =
     "Tu es un assistant de développement expert en rédaction de changelogs clairs et professionnels.";
 
@@ -63,7 +66,7 @@ ${commits.join("\n")}
 Règles :
 - Regroupe les commits par catégorie (Added, Changed, Fixed, Removed, etc.) en utilisant les conventions Keep a Changelog
 - Chaque entrée doit être concise et compréhensible par un utilisateur final
-- Utilise le format "## [${version}] - YYYY-MM-DD" comme titre avec la date du jour
+- Utilise le format "## [${version}] - ${today}" comme titre avec la date du jour
 - Ne mets pas de blocs de code markdown autour du résultat
 - Réponds uniquement avec le changelog, sans explication supplémentaire`;
 
