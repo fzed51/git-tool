@@ -28,10 +28,12 @@ async function main() {
     // Afficher les fichiers dans le stage
     const git = new GitWrapper();
     const stagedFiles = await git.getStagedFiles();
-    
+
     if (stagedFiles.length === 0) {
       console.log(chalk.yellow("\n⚠️  Aucun fichier dans le stage!"));
-      console.log("💡 Utilisez 'git add <fichiers>' pour ajouter des fichiers.\n");
+      console.log(
+        "💡 Utilisez 'git add <fichiers>' pour ajouter des fichiers.\n",
+      );
       process.exit(1);
     }
 
