@@ -278,6 +278,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fzed51/git-tool@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@fzed51/git-tool@workspace:."
+  dependencies:
+    "@biomejs/biome": ^2.3.14
+    "@mistralai/mistralai": ^1.14.0
+    "@types/node": ^22.10.2
+    chalk: ^5.6.2
+    dotenv: ^17.2.4
+    tsx: ^4.21.0
+    typescript: ^5.7.2
+  bin:
+    git-commit: ./dist/git-commit.js
+  languageName: unknown
+  linkType: soft
+
 "@isaacs/balanced-match@npm:^4.0.1":
   version: 4.0.1
   resolution: "@isaacs/balanced-match@npm:4.0.1"
@@ -375,6 +391,13 @@ __metadata:
     ssri: ^13.0.0
     unique-filename: ^5.0.0
   checksum: 595e6b91d72972d596e1e9ccab8ddbf08b773f27240220b1b5b1b7b3f52173cfbcf095212e5d7acd86c3bd453c28e69b116469889c511615ef3589523d542639
+  languageName: node
+  linkType: hard
+
+"chalk@npm:^5.6.2":
+  version: 5.6.2
+  resolution: "chalk@npm:5.6.2"
+  checksum: 4ee2d47a626d79ca27cb5299ecdcce840ef5755e287412536522344db0fc51ca0f6d6433202332c29e2288c6a90a2b31f3bd626bc8c14743b6b6ee28abd3b796
   languageName: node
   linkType: hard
 
@@ -571,19 +594,6 @@ __metadata:
   checksum: 946575897a75b3de39905a8e95fe761b1ae9a595c8608c3982fa3a5748ed0d6441c799197a99fee27876cd8c5a2158418ad6e88d8008ec1244639c0f5ee2a2d8
   languageName: node
   linkType: hard
-
-"git-tool@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "git-tool@workspace:."
-  dependencies:
-    "@biomejs/biome": ^2.3.14
-    "@mistralai/mistralai": ^1.14.0
-    "@types/node": ^22.10.2
-    dotenv: ^17.2.4
-    tsx: ^4.21.0
-    typescript: ^5.7.2
-  languageName: unknown
-  linkType: soft
 
 "glob@npm:^13.0.0":
   version: 13.0.2
