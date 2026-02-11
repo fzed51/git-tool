@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --->
 
+## [0.5.0] - 2026-02-11
+
+### Added
+- Added new scripts for git-commit and git-changelog to streamline development workflow.
+
+### Changed
+- Updated changelog insertion logic to use marker for better changelog management.
+- Corrected the date of version 0.4.0 in the changelog.
+
+
 ## [0.4.0] - 2026-02-11
 
 ### Added
