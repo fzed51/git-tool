@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --->
 
-## [0.4.0] - 2023-11-10
+## [0.4.0] - 2026-02-11
 
 ### Added
 - Added `git-changelog` command for AI-powered changelog generation
