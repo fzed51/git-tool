@@ -24,6 +24,23 @@ async function main() {
         ].join("\n"),
       ),
     );
+
+    // Afficher les fichiers dans le stage
+    const git = new GitWrapper();
+    const stagedFiles = await git.getStagedFiles();
+    
+    if (stagedFiles.length === 0) {
+      console.log(chalk.yellow("\n⚠️  Aucun fichier dans le stage!"));
+      console.log("💡 Utilisez 'git add <fichiers>' pour ajouter des fichiers.\n");
+      process.exit(1);
+    }
+
+    console.log(chalk.blue.bold("\n📋 Fichiers dans le stage:"));
+    for (const file of stagedFiles) {
+      console.log(chalk.cyan(`   • ${file}`));
+    }
+    console.log();
+
     console.log("🤖 Génération du message de commit...\n");
 
     const message = await generateCommitMessage();
@@ -42,7 +59,6 @@ async function main() {
 
     if (answer.toLowerCase() === "o" || answer.toLowerCase() === "y") {
       console.log("\n⏳ Exécution du commit...");
-      const git = new GitWrapper();
       await git.commit(message);
       console.log("✅ Commit effectué avec succès !");
     } else {
