@@ -6,7 +6,8 @@
   "main": "./dist/lib/index.js",
   "types": "./dist/lib/index.d.ts",
   "bin": {
-    "git-commit": "./dist/git-commit.js"
+    "git-commit": "./dist/git-commit.js",
+    "git-changelog": "./dist/git-changelog.js"
   },
   "exports": {
     ".": {
@@ -25,7 +26,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "postbuild": "chmod +x dist/git-commit.js",
+    "postbuild": "chmod +x dist/git-commit.js dist/git-changelog.js",
     "prepublishOnly": "npm run build",
     "dev": "tsx src/git-commit.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",

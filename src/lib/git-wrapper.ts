@@ -215,6 +215,18 @@ export class GitWrapper {
       .filter(Boolean);
     return tags.length > 0 ? tags[0] : "";
   }
+
+  /**
+   * Récupère l'historique des commits depuis un ref donné (tag, commit, branche)
+   * Retourne un tableau de lignes formatées "hash subject"
+   */
+  async getLogSince(since: string, format = "%h %s"): Promise<string[]> {
+    const output = await this.exec(`log ${since}..HEAD --format="${format}"`);
+    return output
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
+  }
 }
 
 /**
