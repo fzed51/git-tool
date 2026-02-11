@@ -44,6 +44,7 @@ Réponds uniquement avec le message de commit, sans explication supplémentaire.
 
   const response = await mistral.chat.complete({
     model: "devstral-medium-latest",
+	temperature:0.2,
     messages: [
       {
         role: "user",
