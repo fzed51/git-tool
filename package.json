@@ -27,7 +27,7 @@
     "build": "tsc",
     "postbuild": "chmod +x dist/git-commit.js",
     "prepublishOnly": "npm run build",
-    "dev": "tsc --watch",
+    "dev": "tsx src/git-commit.ts",
     "lint": "biome check .",
     "lint:fix": "biome check --write ."
   },
