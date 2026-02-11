@@ -25,7 +25,8 @@ export async function generateCommitMessage(): Promise<string> {
   if (!diff.trim()) {
     throw new Error("Aucune modification trouvée dans les fichiers staged.");
   }
-
+  const system =
+    "Tu es un assistant de développement et un expert en Git et en bonnes pratiques de versioning.";
   const prompt = `Analyse les changements git suivants et génère un message de commit concis et descriptif.
 
 Fichiers modifiés:
@@ -44,8 +45,12 @@ Réponds uniquement avec le message de commit, sans explication supplémentaire.
 
   const response = await mistral.chat.complete({
     model: "devstral-medium-latest",
-	temperature:0.2,
+    temperature: 0.2,
     messages: [
+      {
+        role: "system",
+        content: system,
+      },
       {
         role: "user",
         content: prompt,
@@ -63,7 +68,7 @@ Réponds uniquement avec le message de commit, sans explication supplémentaire.
       console.info("completionTokens:", response.usage.completionTokens);
     if (response.usage.totalTokens !== undefined)
       console.info("totalTokens:", response.usage.totalTokens);
-    console.info("─".repeat(30)+"\n");
+    console.info("─".repeat(30) + "\n");
   }
 
   const content = response.choices?.[0]?.message?.content;
