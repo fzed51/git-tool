@@ -14,7 +14,7 @@ const mistral = new Mistral({
 /**
  * Formate un texte en ajoutant des retours à la ligne pour éviter
  * les lignes trop longues, sans couper les mots.
- * 
+ *
  * @param text - Le texte à formater
  * @param maxLength - Longueur maximale par ligne (défaut: 72)
  * @returns Le texte formaté avec retours à la ligne
@@ -31,20 +31,24 @@ export function wrapLines(text: string, maxLength = 72): string {
       wrappedLines.push("");
       continue;
     }
-    
-        // Si la ligne est déjà courte, la conserver
-        if (line.length <= maxLength) {
-          wrappedLines.push(line);
-          continue;
-        }
 
-    // Détecter l'indentation (espaces au début de la ligne)
-    const indent = line.match(/^\s*/)?.[0] || "";
-    const content = line.substring(indent.length);
+    // Si la ligne est déjà courte, la conserver
+    if (line.length <= maxLength) {
+      wrappedLines.push(line);
+      continue;
+    }
 
+    // Détecter l'indentation : espaces + éventuelle puce
+    // ( -, *, +, • ) ou numéro de liste (ex: "1." ou "2)") suivi d'un espace
+    const listIndentMatch = line.match(/^(\s*(?:[-*+•]|(?:\d+[\.\)]))\s+)/);
+    const firstIndent = listIndentMatch
+      ? listIndentMatch[0]
+      : line.match(/^\s*/)?.[0] || "";
+    const content = line.substring(firstIndent.length);
+    const nextIndent = " ".repeat(firstIndent.length);
     // Découper la ligne en respectant les mots
     const words = content.split(/(\s+)/); // Garder les espaces
-    let currentLine = indent;
+    let currentLine = firstIndent;
 
     for (const word of words) {
       const testLine = currentLine + word;
@@ -54,14 +58,14 @@ export function wrapLines(text: string, maxLength = 72): string {
       } else {
         // Si le mot seul est plus long que maxLength
         if (currentLine.trim() === "" && word.trim().length > maxLength) {
-          wrappedLines.push(indent + word.trim());
-          currentLine = indent;
+          wrappedLines.push(nextIndent + word.trim());
+          currentLine = nextIndent;
         } else {
           // Ajouter la ligne actuelle et commencer une nouvelle
           if (currentLine.trim() !== "") {
             wrappedLines.push(currentLine.trimEnd());
           }
-          currentLine = indent + word.trimStart();
+          currentLine = nextIndent + word.trimStart();
         }
       }
     }

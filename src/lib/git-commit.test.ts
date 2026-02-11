@@ -40,7 +40,8 @@ describe("wrapLines", () => {
     });
 
     it("devrait découper sans couper les mots", () => {
-      const input = "This is a very long line that should be wrapped without breaking words in the middle";
+      const input =
+        "This is a very long line that should be wrapped without breaking words in the middle";
       const result = wrapLines(input, 40);
       const lines = result.split("\n");
 
@@ -116,6 +117,52 @@ It includes token refresh mechanism and secure storage implementation.`;
       expect(lines[2]).toMatch(/^ {4}Indentation 4/);
       expect(lines[3]).toMatch(/^ {6}Indentation 6/);
     });
+
+    it("devrait préserver les puces lors du découpage", () => {
+      const input =
+        "- This is a bullet point that is very long and should be wrapped while preserving the bullet prefix and indentation";
+      const result = wrapLines(input, 40);
+
+      console.debug({ input, result });
+
+      const lines = result.split("\n");
+
+      const indentMatch = input.match(/^(\s*(?:[-*+•]|\d+[\.\)]))\s*/);
+      const indent = indentMatch ? indentMatch[0] : "";
+
+      lines.forEach((line, index) => {
+        if (line.trim() !== "") {
+          if (index === 0) {
+            expect(line.startsWith(indent)).toBe(true);
+          } else {
+            expect(line.startsWith(" ".repeat(indent.length))).toBe(true);
+          }
+        }
+      });
+    });
+
+    it("devrait préserver les listes numérotées lors du découpage", () => {
+      const input =
+        "1. This is a numbered item that is very long and should be wrapped while preserving the numbering prefix";
+      const result = wrapLines(input, 40);
+
+      console.debug({ input, result });
+
+      const lines = result.split("\n");
+
+      const indentMatch = input.match(/^(\s*(?:[-*+•]|\d+[\.\)]))\s*/);
+      const indent = indentMatch ? indentMatch[0] : "";
+
+      lines.forEach((line, index) => {
+        if (line.trim() !== "") {
+          if (index === 0) {
+            expect(line.startsWith(indent)).toBe(true);
+          } else {
+            expect(line.startsWith(" ".repeat(indent.length))).toBe(true);
+          }
+        }
+      });
+    });
   });
 
   describe("Cas limites", () => {
@@ -132,7 +179,8 @@ It includes token refresh mechanism and secure storage implementation.`;
     });
 
     it("devrait gérer des espaces multiples", () => {
-      const input = "word1    word2    word3 that needs to be wrapped because it is too long";
+      const input =
+        "word1    word2    word3 that needs to be wrapped because it is too long";
       const result = wrapLines(input, 40);
       const lines = result.split("\n");
 
