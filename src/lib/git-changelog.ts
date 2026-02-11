@@ -103,7 +103,7 @@ Règles :
 
 /**
  * Met à jour le fichier CHANGELOG.md en ajoutant le nouveau contenu
- * en haut du fichier (après le titre principal s'il existe).
+ * à l'emplacement du marqueur "--->" s'il existe.
  */
 export async function updateChangelogFile(
   newEntry: string,
@@ -122,15 +122,21 @@ export async function updateChangelogFile(
     existingContent = "# Changelog\n";
   }
 
-  // Insérer après le titre "# Changelog" s'il existe
-  const titleMatch = existingContent.match(/^# .+\n/);
+  // Insérer après le marqueur "--->" s'il existe
+  const markerIndex = existingContent.indexOf("--->");
   let updatedContent: string;
 
-  if (titleMatch) {
-    const afterTitle = existingContent.substring(titleMatch[0].length);
-    updatedContent = `${titleMatch[0]}\n${newEntry}\n${afterTitle}`;
+  if (markerIndex !== -1) {
+    const afterMarker = existingContent.substring(markerIndex + 4);
+    updatedContent = `${existingContent.substring(0, markerIndex + 4)}\n\n${newEntry}\n${afterMarker}`;
   } else {
-    updatedContent = `# Changelog\n\n${newEntry}\n\n${existingContent}`;
+    const titleMatch = existingContent.match(/^# .+\n/);
+    if (titleMatch) {
+      const afterTitle = existingContent.substring(titleMatch[0].length);
+      updatedContent = `${titleMatch[0]}\n${newEntry}\n${afterTitle}`;
+    } else {
+      updatedContent = `# Changelog\n\n${newEntry}\n\n${existingContent}`;
+    }
   }
 
   await writeFile(fullPath, updatedContent, "utf-8");
