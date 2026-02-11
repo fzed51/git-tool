@@ -691,6 +691,7 @@ __metadata:
     "@types/jest": ^30.0.0
     "@types/node": ^22.10.2
     chalk: ^5.6.2
+    commander: ^14.0.3
     dotenv: ^17.2.4
     jest: ^30.2.0
     ts-jest: ^29.4.6
@@ -1790,6 +1791,13 @@ __metadata:
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
+  languageName: node
+  linkType: hard
+
+"commander@npm:^14.0.3":
+  version: 14.0.3
+  resolution: "commander@npm:14.0.3"
+  checksum: b8440159124aefbb02784a8996cd0481d8ce503d8d3cd413f4289d06db7e912c36b511277c2faba62f59152dd9ff79239d75e3b9400d9402851878994201d429
   languageName: node
   linkType: hard
 
