@@ -11,6 +11,8 @@ const mistral = new Mistral({
   apiKey: process.env.MISTRAL_API_KEY,
 });
 
+const mistralModel = process.env.MISTRAL_MODEL || "mistral-small-latest";
+
 /**
  * Formate un texte en ajoutant des retours à la ligne pour éviter
  * les lignes trop longues, sans couper les mots.
@@ -110,7 +112,7 @@ Génère un message de commit qui suit les conventions:
 Réponds uniquement avec le message de commit, sans explication supplémentaire, sans mise en forme markdown.`;
 
   const response = await mistral.chat.complete({
-    model: "mistral-small-latest",
+    model: mistralModel,
     temperature: 0.2,
     messages: [
       {

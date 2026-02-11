@@ -11,6 +11,8 @@ const mistral = new Mistral({
   apiKey: process.env.MISTRAL_API_KEY,
 });
 
+const mistralModel = process.env.MISTRAL_MODEL || "mistral-small-latest";
+
 /**
  * Récupère le dernier tag de version.
  * Si aucun tag n'existe, retourne une chaîne vide.
@@ -71,8 +73,8 @@ Règles :
 - Réponds uniquement avec le changelog, sans explication supplémentaire`;
 
   const response = await mistral.chat.complete({
-    model: "mistral-small-latest",
-    temperature: 0.2,
+    model: mistralModel,
+    temperature: 0.3,
     messages: [
       { role: "system", content: system },
       { role: "user", content: prompt },

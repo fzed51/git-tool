@@ -4,7 +4,7 @@ Outil en ligne de commande pour Git avec génération automatique de messages de
 
 ## Description
 
-Git Tool est un utilitaire CLI qui améliore votre workflow Git en générant automatiquement des messages de commit pertinents et descriptifs à partir des fichiers staged et de leurs différences. Utilisant l'IA Mistral (modèle `devstral-medium-latest`), l'outil analyse vos modifications et produit des messages de commit suivant les conventions standards.
+Git Tool est un utilitaire CLI qui améliore votre workflow Git en générant automatiquement des messages de commit pertinents et descriptifs à partir des fichiers staged et de leurs différences. Utilisant l'IA Mistral (modèle `devstral-latest`), l'outil analyse vos modifications et produit des messages de commit suivant les conventions standards.
 
 ## Caractéristiques 
 
@@ -80,6 +80,7 @@ Créez un fichier `.env` à la racine du projet (ou dans votre répertoire home 
 ```env
 # Clé API Mistral (requis)
 MISTRAL_API_KEY=votre_cle_api_mistral
+MISTRAL_MODEL=devstral-latest
 ```
 
 **Obtenir une clé API Mistral :**
@@ -123,7 +124,7 @@ git-tool/
 ## Technologies
 
 - **TypeScript** - Langage principal (ESM)
-- **Mistral AI** - Modèle `devstral-medium-latest` pour la génération
+- **Mistral AI** - Modèle `devstral-latest` pour la génération
 - **Biome.js** - Linting et formatting ultra-rapide
 - **Chalk** - Couleurs et style dans le terminal
 - **Node.js** - ≥ 18.0.0
