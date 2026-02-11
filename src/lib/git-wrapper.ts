@@ -194,6 +194,27 @@ export class GitWrapper {
     const status = await this.getStatus();
     return status.length > 0;
   }
+
+  /**
+   * Récupère le dernié tag
+   */
+  async getLastTag(): Promise<string> {
+    return await this.exec("describe --tags --abrev=0");
+  }
+
+  /**
+   * Récupère le dernier tag de version suivant le pattern vMAJOR.MINOR.PATCH (ex: v1.2.3)
+   */
+  async getLastVersionTag(): Promise<string> {
+    const output = await this.exec(
+      'tag --list "v[0-9]*.[0-9]*.[0-9]*" --sort=-v:refname',
+    );
+    const tags = output
+      .split("\n")
+      .map((t) => t.trim())
+      .filter(Boolean);
+    return tags.length > 0 ? tags[0] : "";
+  }
 }
 
 /**
