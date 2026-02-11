@@ -28,6 +28,9 @@
     "postbuild": "chmod +x dist/git-commit.js",
     "prepublishOnly": "npm run build",
     "dev": "tsx src/git-commit.ts",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "lint": "biome check .",
     "lint:fix": "biome check --write ."
   },
@@ -48,7 +51,10 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^2.3.14",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.10.2",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
     "tsx": "^4.21.0",
     "typescript": "^5.7.2"
   },

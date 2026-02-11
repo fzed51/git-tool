@@ -14,3 +14,8 @@ dist/
 
 # Env file
 .env
+
+# Tests
+coverage/
+*.test.js
+*.test.d.ts
