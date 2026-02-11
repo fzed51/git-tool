@@ -11,6 +11,68 @@ const mistral = new Mistral({
   apiKey: process.env.MISTRAL_API_KEY,
 });
 
+/**
+ * Formate un texte en ajoutant des retours à la ligne pour éviter
+ * les lignes trop longues, sans couper les mots.
+ * 
+ * @param text - Le texte à formater
+ * @param maxLength - Longueur maximale par ligne (défaut: 72)
+ * @returns Le texte formaté avec retours à la ligne
+ */
+export function wrapLines(text: string, maxLength = 72): string {
+  const lines = text.split("\n");
+  const wrappedLines: string[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Ligne vide : conserver telle quelle
+    if (line.trim() === "") {
+      wrappedLines.push("");
+      continue;
+    }
+    
+        // Si la ligne est déjà courte, la conserver
+        if (line.length <= maxLength) {
+          wrappedLines.push(line);
+          continue;
+        }
+
+    // Détecter l'indentation (espaces au début de la ligne)
+    const indent = line.match(/^\s*/)?.[0] || "";
+    const content = line.substring(indent.length);
+
+    // Découper la ligne en respectant les mots
+    const words = content.split(/(\s+)/); // Garder les espaces
+    let currentLine = indent;
+
+    for (const word of words) {
+      const testLine = currentLine + word;
+
+      if (testLine.length <= maxLength) {
+        currentLine = testLine;
+      } else {
+        // Si le mot seul est plus long que maxLength
+        if (currentLine.trim() === "" && word.trim().length > maxLength) {
+          wrappedLines.push(indent + word.trim());
+          currentLine = indent;
+        } else {
+          // Ajouter la ligne actuelle et commencer une nouvelle
+          if (currentLine.trim() !== "") {
+            wrappedLines.push(currentLine.trimEnd());
+          }
+          currentLine = indent + word.trimStart();
+        }
+      }
+    }
+    if (currentLine.trim() !== "") {
+      wrappedLines.push(currentLine.trimEnd());
+    }
+  }
+
+  return wrappedLines.join("\n");
+}
+
 export async function generateCommitMessage(): Promise<string> {
   const stagedFiles = await git.getStagedFiles();
 
@@ -78,5 +140,5 @@ Réponds uniquement avec le message de commit, sans explication supplémentaire.
     throw new Error("Impossible de générer un message de commit.");
   }
 
-  return commitMessage;
+  return wrapLines(commitMessage, 72);
 }
