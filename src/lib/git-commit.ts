@@ -107,10 +107,10 @@ Génère un message de commit qui suit les conventions:
 - Utilise l'impératif présent (ex: "feat", "fix", "test", "doc", "chore")
 - Soit clair et précis sur ce qui a changé et pourquoi
 
-Réponds uniquement avec le message de commit, sans explication supplémentaire.`;
+Réponds uniquement avec le message de commit, sans explication supplémentaire, sans mise en forme markdown.`;
 
   const response = await mistral.chat.complete({
-    model: "devstral-medium-latest",
+    model: "mistral-small-latest",
     temperature: 0.2,
     messages: [
       {
