@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --->
 
+## [0.6.0] - 2026-02-12
+
+### Added
+- Ajout du modèle Mistral pour de meilleures performances
+
+### Changed
+- Ajustement des paramètres pour une meilleure compatibilité avec le modèle Mistral
+
+
 ## [0.5.0] - 2026-02-11
 
 ### Added
