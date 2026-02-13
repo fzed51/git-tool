@@ -105,6 +105,7 @@ Génère un message de commit qui suit les conventions:
 
 Réponds uniquement avec le message de commit, sans explication supplémentaire, sans mise en forme markdown.`,
     temperature: 0.2,
+    log: true,
   });
 
   return wrapLines(commitMessage, 72);

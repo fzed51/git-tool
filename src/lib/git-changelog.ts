@@ -64,6 +64,7 @@ Règles :
 - Utilise le format "## [${version}] - ${today}" comme titre avec la date du jour
 - Ne mets pas de blocs de code markdown autour du résultat
 - Réponds uniquement avec le changelog, sans explication supplémentaire`,
+    log: true,
   });
 
   return changelog;
