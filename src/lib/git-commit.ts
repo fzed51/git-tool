@@ -100,7 +100,7 @@ ${diff}
 Génère un message de commit qui suit les conventions:
 - Une ligne de résumé de 50 caractères maximum
 - Si nécessaire, une ligne vide suivie d'une description plus détaillée
-- Utilise l'impératif présent (ex: "feat", "fix", "test", "doc", "chore")
+- Commence par un type de commit (ex: "feat", "fix", "test", "doc", "chore")
 - Soit clair et précis sur ce qui a changé et pourquoi
 
 Réponds uniquement avec le message de commit, sans explication supplémentaire, sans mise en forme markdown.`,
