@@ -16,6 +16,7 @@ interface ChatOptions {
   system: string;
   prompt: string;
   temperature?: number;
+  log?: boolean;
 }
 
 /**
@@ -56,7 +57,7 @@ function logTokenUsage(usage: {
  * @throws Si la réponse est vide ou invalide
  */
 export async function chat(options: ChatOptions): Promise<string> {
-  const { system, prompt, temperature = 0.3 } = options;
+  const { system, prompt, temperature = 0.3, log = false } = options;
 
   const response = await mistral.chat.complete({
     model: mistralModel,
@@ -67,7 +68,7 @@ export async function chat(options: ChatOptions): Promise<string> {
     ],
   });
 
-  if (response.usage) {
+  if (response.usage && log) {
     logTokenUsage(response.usage);
   }
 
