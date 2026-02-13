@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --->
 
+## [0.7.0] - 2026-02-13
+
+### Added
+- Option de journalisation pour le suivi des tokens
+
+### Changed
+- Centralisation de la configuration et des appels Mistral AI
+
+
 ## [0.6.0] - 2026-02-12
 
 ### Added
