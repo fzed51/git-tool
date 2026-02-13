@@ -3,15 +3,8 @@
  * Génère automatiquement un message de commit à partir des fichiers staged
  */
 
-import "dotenv/config";
-import { Mistral } from "@mistralai/mistralai";
+import { chat } from "./mistral.js";
 import { git } from "./git-wrapper.js";
-
-const mistral = new Mistral({
-  apiKey: process.env.MISTRAL_API_KEY,
-});
-
-const mistralModel = process.env.MISTRAL_MODEL || "mistral-small-latest";
 
 /**
  * Formate un texte en ajoutant des retours à la ligne pour éviter
@@ -93,9 +86,10 @@ export async function generateCommitMessage(): Promise<string> {
   if (!diff.trim()) {
     throw new Error("Aucune modification trouvée dans les fichiers staged.");
   }
-  const system =
-    "Tu es un assistant de développement et un expert en Git et en bonnes pratiques de versioning.";
-  const prompt = `Analyse les changements git suivants et génère un message de commit concis et descriptif.
+  const commitMessage = await chat({
+    system:
+      "Tu es un assistant de développement et un expert en Git et en bonnes pratiques de versioning.",
+    prompt: `Analyse les changements git suivants et génère un message de commit concis et descriptif.
 
 Fichiers modifiés:
 ${stagedFiles.join("\n")}
@@ -109,42 +103,9 @@ Génère un message de commit qui suit les conventions:
 - Utilise l'impératif présent (ex: "feat", "fix", "test", "doc", "chore")
 - Soit clair et précis sur ce qui a changé et pourquoi
 
-Réponds uniquement avec le message de commit, sans explication supplémentaire, sans mise en forme markdown.`;
-
-  const response = await mistral.chat.complete({
-    model: mistralModel,
+Réponds uniquement avec le message de commit, sans explication supplémentaire, sans mise en forme markdown.`,
     temperature: 0.2,
-    messages: [
-      {
-        role: "system",
-        content: system,
-      },
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
   });
-
-  // Log token usage
-  if (response.usage) {
-    console.info("\nTokens utilisés:");
-    console.info("─".repeat(30));
-    if (response.usage.promptTokens !== undefined)
-      console.info("promptTokens:", response.usage.promptTokens);
-    if (response.usage.completionTokens !== undefined)
-      console.info("completionTokens:", response.usage.completionTokens);
-    if (response.usage.totalTokens !== undefined)
-      console.info("totalTokens:", response.usage.totalTokens);
-    console.info("─".repeat(30) + "\n");
-  }
-
-  const content = response.choices?.[0]?.message?.content;
-  const commitMessage = typeof content === "string" ? content.trim() : "";
-
-  if (!commitMessage) {
-    throw new Error("Impossible de générer un message de commit.");
-  }
 
   return wrapLines(commitMessage, 72);
 }

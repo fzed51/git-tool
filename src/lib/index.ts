@@ -12,3 +12,4 @@ export {
 } from "./git-changelog.js";
 export { git, GitWrapper } from "./git-wrapper.js";
 export type { GitExecOptions } from "./git-wrapper.js";
+export { chat } from "./mistral.js";
