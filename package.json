@@ -1,6 +1,6 @@
 {
   "name": "@fzed51/git-tool",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "A command-line tool for Git operations with AI-powered commit message generation",
   "type": "module",
   "main": "./dist/lib/index.js",
