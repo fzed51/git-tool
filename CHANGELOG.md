@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --->
 
+## [v0.8.0] - 2026-02-25
+
+### Added
+- Added a new `git-branch` command for creating formatted Git branches.
+- Added an option to log API calls for better tracking.
+
+### Fixed
+- Corrected commit message conventions for better consistency.
+
+
 ## [0.7.0] - 2026-02-13
 
 ### Added
