@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 --->
 
+## [0.8.1] - 2026-02-25
+
+### Fixed
+- Corrected the formatting of the `branch` command in the git-wrapper.
+
+
 ## [v0.8.0] - 2026-02-25
 
 ### Added
