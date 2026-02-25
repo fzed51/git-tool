@@ -232,7 +232,7 @@ export class GitWrapper {
    * Liste toutes les branches locales
    */
   async getLocalBranches(): Promise<string[]> {
-    const output = await this.exec("branch --format=%(refname:short)");
+    const output = await this.exec('branch --format="%(refname:short)"');
     return output
       .split("\n")
       .map((b) => b.trim())
