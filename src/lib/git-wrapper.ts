@@ -227,6 +227,57 @@ export class GitWrapper {
       .map((l) => l.trim())
       .filter(Boolean);
   }
+
+  /**
+   * Liste toutes les branches locales
+   */
+  async getLocalBranches(): Promise<string[]> {
+    const output = await this.exec("branch --format=%(refname:short)");
+    return output
+      .split("\n")
+      .map((b) => b.trim())
+      .filter(Boolean);
+  }
+
+  /**
+   * Vérifie si une branche locale existe
+   */
+  async branchExists(name: string): Promise<boolean> {
+    try {
+      await this.exec(`rev-parse --verify refs/heads/${name}`);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Change de branche (checkout)
+   */
+  async checkout(branch: string): Promise<void> {
+    await this.exec(`checkout ${branch}`);
+  }
+
+  /**
+   * Met à jour la branche courante via pull
+   */
+  async pull(): Promise<void> {
+    await this.exec("pull");
+  }
+
+  /**
+   * Crée une nouvelle branche et bascule dessus
+   */
+  async createBranch(name: string): Promise<void> {
+    await this.exec(`checkout -b ${name}`);
+  }
+
+  /**
+   * Fetch depuis le remote
+   */
+  async fetch(): Promise<void> {
+    await this.exec("fetch");
+  }
 }
 
 /**

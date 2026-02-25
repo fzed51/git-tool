@@ -7,7 +7,8 @@
   "types": "./dist/lib/index.d.ts",
   "bin": {
     "git-commit": "./dist/git-commit.js",
-    "git-changelog": "./dist/git-changelog.js"
+    "git-changelog": "./dist/git-changelog.js",
+    "git-branch": "./dist/git-branch.js"
   },
   "exports": {
     ".": {
@@ -26,10 +27,11 @@
   },
   "scripts": {
     "build": "tsc",
-    "postbuild": "chmod +x dist/git-commit.js dist/git-changelog.js",
+    "postbuild": "chmod +x dist/git-commit.js dist/git-changelog.js dist/git-branch.js",
     "prepublishOnly": "npm run build",
     "git-commit": "tsx src/git-commit.ts",
     "git-changelog": "tsx src/git-changelog.ts",
+    "git-branch": "tsx src/git-branch.ts",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
